@@ -5,10 +5,10 @@
 This is the central repository for all my development projects, including chat applications, microservices, documentation, personal tools, and more. By managing everything under one roof, this monorepo ensures **better asset sharing, unified tooling, and streamlined CI/CD workflows**.
 
 ## 📂 Projects Included
+- **portfolio/** – Personal website (includes submodule [d-a-s-h-o/d-a-s-h-o](https://github.com/d-a-s-h-o/d-a-s-h-o))
 - **chat/** – Real-time chat application
 - **droplets/** – Microservices for various tasks
 - **docs/** – Documentation and guides
-- **portfolio/** – Personal website
 - **verify/** – Verification services
 - **sshchat/** – Secure chat platform
 - **dotfiles/** – Development environment configurations
@@ -21,6 +21,15 @@ This is the central repository for all my development projects, including chat a
 - **Containerized environments** – Uses **GitHub Container Registry (GHCR)** for project-specific container builds.
 
 ## 🚀 Getting Started
+### Cloning with Submodules
+This repository includes a submodule for the portfolio project. To ensure it is initialized correctly, clone with:
+```sh
+git clone --recurse-submodules git@github.com:d-a-s-h-o/universe.git
+```
+If you have already cloned the repository, initialize and update submodules manually:
+```sh
+git submodule update --init --recursive
+```
 ### Clone the Monorepo
 This repo is large, so use **sparse checkout** to download only the necessary projects.
 ```sh
