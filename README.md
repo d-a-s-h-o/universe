@@ -9,7 +9,7 @@ This is the central repository for all my development projects, including chat a
 - **chat/** – Real-time chat application
 - **droplets/** – Microservices for various tasks
 - **docs/** – Documentation and guides
-- **verify/** – Verification services
+- **crypto/** – Crypto & Verification services
 - **sshchat/** – Secure chat platform
 - **dotfiles/** – Development environment configurations
 
