@@ -1,3 +1,6 @@
 [submodule "portfolio"]
 	path = portfolio
 	url = https://github.com/d-a-s-h-o/d-a-s-h-o.git
+[submodule "droplets"]
+	path = droplets
+	url = https://github.com/d-a-s-h-o/droplets
