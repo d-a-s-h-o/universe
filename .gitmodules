@@ -4,3 +4,6 @@
 [submodule "droplets"]
 	path = droplets
 	url = https://github.com/d-a-s-h-o/droplets
+[submodule "dotfiles"]
+	path = dotfiles
+	url = https://github.com/d-a-s-h-o/dotfiles
