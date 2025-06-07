@@ -28,7 +28,7 @@ load_config();
 // set session variable to cookie if cookies are enabled
 if(!isset($_REQUEST['session']) && isset($_COOKIE[COOKIENAME])){
     
-   //Modification that prevents users from doing unwanted things (for exmaple unintenionally deleting their account), if someone else posts a malicious link.
+   //Modification that prevents users from doing unwanted things (for example unintentionally deleting their account), if someone else posts a malicious link.
 	// MODIFICATION added logout to list of unwanted things
     if(isset($_REQUEST['action']) && ($_REQUEST['action']==='profile'||$_REQUEST['action']==='post'|| $_REQUEST['action']==='admin' || $_REQUEST['action']==='setup'||$_REQUEST['action']==='logout')){
         $_REQUEST['action']='login';
