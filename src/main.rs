@@ -1,7 +1,11 @@
 use dialoguer::{theme::ColorfulTheme, Select, Input};
-use std::os::windows::process::ExitStatusExt;
 use std::process::Command;
+#[cfg(test)]
 use std::process::Output;
+#[cfg(all(test, unix))]
+use std::os::unix::process::ExitStatusExt;
+#[cfg(all(test, windows))]
+use std::os::windows::process::ExitStatusExt;
 
 /// Main entry point for UniShell - Git Operations Terminal
 fn main() {
