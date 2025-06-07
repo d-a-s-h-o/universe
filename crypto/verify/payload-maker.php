@@ -4,7 +4,7 @@
 // The resulting string will look like this: 7674ffcd9882e411415ea1ab7726642d
 
 /*
-This is a copy of the script that is used to generate the payload for the verification process on verify.dasho.dev. Use this script alongside with the payload-verifier-v1.php script to make payloads that others can verify.
+This is a copy of the script that is used to generate the payload for the verification process on verify.dasho.dev. Use this script alongside with the payload-verifier.php script to make payloads that others can verify.
 */
 
 define('SALT', sodium_hex2bin('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'));
