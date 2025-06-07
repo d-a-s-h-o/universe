@@ -1,7 +1,6 @@
 use dialoguer::{theme::ColorfulTheme, Select, Input};
-use std::process::Command;
-#[cfg(test)]
-use std::process::Output;
+use std::process::{Command, Output};
+use std::env;
 #[cfg(all(test, unix))]
 use std::os::unix::process::ExitStatusExt;
 #[cfg(all(test, windows))]
@@ -67,6 +66,32 @@ fn git_status() {
     println!("{}", String::from_utf8_lossy(&output.stdout));
 }
 
+/// Returns the executable used for git operations (overridden in tests)
+fn git_bin() -> String {
+    env::var("GIT_BIN").unwrap_or_else(|_| "git".to_string())
+}
+
+/// Adds specified files to the staging area and returns the command output
+fn git_add_files(files: &str) -> Output {
+    println!("Running `git add {}`...", files);
+    Command::new(git_bin())
+        .arg("add")
+        .arg(files)
+        .output()
+        .expect("Failed to execute git add")
+}
+
+/// Commits with the provided message and returns the command output
+fn git_commit_message(message: &str) -> Output {
+    println!("Running `git commit -m \"{}\"`...", message);
+    Command::new(git_bin())
+        .arg("commit")
+        .arg("-m")
+        .arg(message)
+        .output()
+        .expect("Failed to execute git commit")
+}
+
 /// Adds files to the staging area
 fn git_add() {
     let files: String = Input::new()
@@ -74,12 +99,7 @@ fn git_add() {
         .interact_text()
         .unwrap();
 
-    println!("Running `git add {}`...", files);
-    Command::new("git")
-        .arg("add")
-        .arg(files)
-        .status()
-        .expect("Failed to execute git add");
+    git_add_files(&files);
 }
 
 /// Commits changes with a message
@@ -89,13 +109,7 @@ fn git_commit() {
         .interact_text()
         .unwrap();
 
-    println!("Running `git commit -m \"{}\"`...", message);
-    Command::new("git")
-        .arg("commit")
-        .arg("-m")
-        .arg(message)
-        .status()
-        .expect("Failed to execute git commit");
+    git_commit_message(&message);
 }
 
 /// Pushes changes to the remote repository
@@ -242,16 +256,24 @@ mod tests {
 
     #[test]
     fn test_git_add() {
-        // Mocking user input and command execution
-        let files = "test_file.txt";
-        assert_eq!(files, "test_file.txt");
+        unsafe { std::env::set_var("GIT_BIN", "echo") };
+        let output = git_add_files("test_file.txt");
+        assert_eq!(
+            String::from_utf8_lossy(&output.stdout).trim(),
+            "add test_file.txt"
+        );
+        unsafe { std::env::remove_var("GIT_BIN") };
     }
 
     #[test]
     fn test_git_commit() {
-        // Mocking user input and command execution
-        let message = "Initial commit";
-        assert_eq!(message, "Initial commit");
+        unsafe { std::env::set_var("GIT_BIN", "echo") };
+        let output = git_commit_message("Initial commit");
+        assert_eq!(
+            String::from_utf8_lossy(&output.stdout).trim(),
+            "commit -m Initial commit"
+        );
+        unsafe { std::env::remove_var("GIT_BIN") };
     }
 
     #[test]
