@@ -390,7 +390,7 @@ function print_end()
 
 function credit()
 {
-	return '<small><br><br><a target="_blank" style="color:var(--accent); text-decoration: underline dotted var(--accent)" href="https://onionz.dev/">The Onionz Project</a></small>';
+	return '<small><br><br><a target="_blank" style="color:var(--accent); text-decoration: underline dotted var(--accent)" href="https://4-0-4.io">Project 404</a></small>';
 }
 
 function meta_html()
@@ -401,7 +401,7 @@ function meta_html()
 function form($action, $do = '')
 {
 	global $language;
-	$form = "<form action=\"$_SERVER[SCRIPT_NAME]\" enctype=\"multipart/form-data\" method=\"post\">" . hidden('lang', $language) . hidden('nc', substr(time(), -6)) . hidden('action', $action);
+	$form = "<form action=\"\" enctype=\"multipart/form-data\" method=\"post\">" . hidden('lang', $language) . hidden('nc', substr(time(), -6)) . hidden('action', $action);
 	if (!empty($_REQUEST['session'])) {
 		$form .= hidden('session', $_REQUEST['session']);
 	}
@@ -414,7 +414,7 @@ function form($action, $do = '')
 function form_target($target, $action, $do = '')
 {
 	global $language;
-	$form = "<form action=\"$_SERVER[SCRIPT_NAME]\" enctype=\"multipart/form-data\" method=\"post\" target=\"$target\">" . hidden('lang', $language) . hidden('nc', substr(time(), -6)) . hidden('action', $action);
+	$form = "<form action=\"\" enctype=\"multipart/form-data\" method=\"post\" target=\"$target\">" . hidden('lang', $language) . hidden('nc', substr(time(), -6)) . hidden('action', $action);
 	if (!empty($_REQUEST['session'])) {
 		$form .= hidden('session', $_REQUEST['session']);
 	}
@@ -1320,7 +1320,7 @@ function send_init()
 	echo '</table></td></tr><tr><td><br>' . submit($I['initbtn']) . '</td></tr></table></form>';
 	echo "<p id=\"changelang\">$I[changelang]";
 	foreach ($L as $lang => $name) {
-		echo " <a href=\"$_SERVER[SCRIPT_NAME]?action=setup&amp;lang=$lang\">$name</a>";
+		echo " <a href=\"?action=setup&amp;lang=$lang\">$name</a>";
 	}
 	echo '</p>' . credit();
 	print_end();
@@ -1345,7 +1345,7 @@ function send_alogin()
 	echo '<tr><td colspan="2">' . submit($I['login']) . '</td></tr></table></form>';
 	echo "<p id=\"changelang\">$I[changelang]";
 	foreach ($L as $lang => $name) {
-		echo " <a href=\"$_SERVER[SCRIPT_NAME]?action=setup&amp;lang=$lang\">$name</a>";
+		echo " <a href=\"?action=setup&amp;lang=$lang\">$name</a>";
 	}
 	echo '</p>' . credit();
 	print_end();
@@ -1700,7 +1700,7 @@ function send_gallery($site = 1)
 	$GalleryAdminStatus = '5';
 
 	print_start('gallery');
-	echo "<h1>The Underground Gallery</h1>";
+	echo "<h1>The 404 Gallery</h1>";
 
 	if ($U['status'] < (int)get_setting('galleryaccess')) {
 
@@ -2417,9 +2417,9 @@ function send_frameset()
 		$noscroll_top = "scrolling=\"yes\" style=\"overflow-y:hidden !important;\"";
 		$noscroll_bot = "";
 	}
-	echo "<div id=\"frameset-mid\" style=\"$frameset_mid_style\"><iframe name=\"view\" src=\"$_SERVER[SCRIPT_NAME]?action=$action_mid&session=$U[session]&lang=$language$bottom\">" . noframe_html() . "</iframe></div>";
-	echo "<div id=\"frameset-top\" style=\"$frameset_top_style\"><iframe $noscroll_top name=\"$action_top\" src=\"$_SERVER[SCRIPT_NAME]?action=$action_top&session=$U[session]&lang=$language\">" . noframe_html() . "</iframe></div>";
-	echo "<div id=\"frameset-bot\" style=\"$frameset_bot_style\"><iframe $noscroll_bot name=\"$action_bot\" src=\"$_SERVER[SCRIPT_NAME]?action=$action_bot&session=$U[session]&lang=$language$sort_bot\">" . noframe_html() . "</iframe></div>";
+	echo "<div id=\"frameset-mid\" style=\"$frameset_mid_style\"><iframe name=\"view\" src=\"?action=$action_mid&session=$U[session]&lang=$language$bottom\">" . noframe_html() . "</iframe></div>";
+	echo "<div id=\"frameset-top\" style=\"$frameset_top_style\"><iframe $noscroll_top name=\"$action_top\" src=\"?action=$action_top&session=$U[session]&lang=$language\">" . noframe_html() . "</iframe></div>";
+	echo "<div id=\"frameset-bot\" style=\"$frameset_bot_style\"><iframe $noscroll_bot name=\"$action_bot\" src=\"?action=$action_bot&session=$U[session]&lang=$language$sort_bot\">" . noframe_html() . "</iframe></div>";
 	echo '</body></html>';
 	exit;
 }
@@ -2472,7 +2472,7 @@ function send_messages()
 	if (isset($_REQUEST['modroom']) && $_REQUEST['modroom']) {
 		$modroom = '&modroom=1';
 	}
-	print_start('messages', $U['refresh'], "$_SERVER[SCRIPT_NAME]?action=view&session=$U[session]&lang=$language$nocache$sort$modroom" . uniqid('?r='));
+	print_start('messages', $U['refresh'], "?action=view&session=$U[session]&lang=$language$nocache$sort$modroom" . uniqid('?r='));
 	echo '<a id="top"></a>';
 	echo "<a id=\"bottom_link\" href=\"#bottom\">$I[bottom]</a>";
 	//MODIFICATION We don't like the manual refresh box.
@@ -2686,7 +2686,7 @@ function send_waiting_room()
 		send_frameset();
 	} else {
 		$refresh = (int) get_setting('defaultrefresh');
-		print_start('waitingroom', $refresh, "$_SERVER[SCRIPT_NAME]?action=wait&session=$U[session]&lang=$language&nc=" . substr(time(), -6));
+		print_start('waitingroom', $refresh, "?action=wait&session=$U[session]&lang=$language&nc=" . substr(time(), -6));
 		echo "<h2>$I[waitingroom]</h2><p>";
 		if ($wait) {
 			printf($I['waittext'], style_this(htmlspecialchars($U['nickname']), $U['style']), $timeleft);
@@ -2908,7 +2908,7 @@ function send_post($rejected = '')
 function send_greeting()
 {
 	global $I, $U, $language;
-	print_start('greeting', $U['refresh'], "$_SERVER[SCRIPT_NAME]?action=view&session=$U[session]&lang=$language");
+	print_start('greeting', $U['refresh'], "?action=view&session=$U[session]&lang=$language");
 	printf("<h1>$I[greetingmsg]</h1>", style_this(htmlspecialchars($U['nickname']), $U['style']));
 	printf("<hr><small>$I[entryhelp]</small>", $U['refresh']);
 	$rulestxt = get_setting('rulestxt');
@@ -2978,10 +2978,10 @@ function send_profile($arg = '')
 	echo "<input type=\"number\" name=\"refresh\" size=\"3\" maxlength=\"3\" min=\"5\" max=\"150\" value=\"$U[refresh]\"></td></tr></table></td></tr>";
 	thr();
 	preg_match('/#([0-9a-f]{6})/i', $U['style'], $matches);
-	echo "<tr><td><table id=\"colour\"><tr><th>$I[fontcolour] (<a href=\"$_SERVER[SCRIPT_NAME]?action=colours&amp;session=$U[session]&amp;lang=$language\" target=\"view\">$I[viewexample]</a>)</th><td>";
+	echo "<tr><td><table id=\"colour\"><tr><th>$I[fontcolour] (<a href=\"?action=colours&amp;session=$U[session]&amp;lang=$language\" target=\"view\">$I[viewexample]</a>)</th><td>";
 	echo "<input type=\"color\" value=\"#$matches[1]\" name=\"colour\"></td></tr></table></td></tr>";
 	thr();
-	echo "<tr><td><table id=\"bgcolour\"><tr><th>$I[bgcolour] (<a href=\"$_SERVER[SCRIPT_NAME]?action=colours&amp;session=$U[session]&amp;lang=$language\" target=\"view\">$I[viewexample]</a>)</th><td>";
+	echo "<tr><td><table id=\"bgcolour\"><tr><th>$I[bgcolour] (<a href=\"?action=colours&amp;session=$U[session]&amp;lang=$language\" target=\"view\">$I[viewexample]</a>)</th><td>";
 	echo "<input type=\"color\" value=\"#$U[bgcolour]\" name=\"bgcolour\"></td></tr></table></td></tr>";
 	thr();
 	if ($U['status'] >= 3) {
@@ -3109,7 +3109,7 @@ function send_profile($arg = '')
 	}
 	echo "<br><p id=\"changelang\">$I[changelang]";
 	foreach ($L as $lang => $name) {
-		echo " <a href=\"$_SERVER[SCRIPT_NAME]?lang=$lang&amp;session=$U[session]&amp;action=controls\" target=\"controls\">$name</a>";
+		echo " <a href=\"?lang=$lang&amp;session=$U[session]&amp;action=controls\" target=\"controls\">$name</a>";
 	}
 	echo '</p><br>' . form('view') . submit($I['backtochat'], 'class="backbutton"') . '</form>';
 	print_end();
@@ -3228,11 +3228,12 @@ function send_colours()
 function nav()
 {
 	echo '
-	<div class="navbartitle"><a href="#" style="text-decoration: none; color: #fff;">Chatterbox</a></div>
+	<div class="navbartitle"><a href="#" style="text-decoration: none; color: #fff;">404 Chatroom Not Found</a></div>
 	<nav class="topnav">
 	<ul class="topnav">
 	<li><a href="#ABOUT" target="_self">About</a></li>
 	<li><a href="https://github.com/d-a-s-h-o/universe" target="_blank">Source</a></li>
+	<li><a href="/" target="_blank">Homepage</a></li>
 	<a class="wgbtn" href="#logincbox">Login</a>
 	</ul> </nav>';
 }
@@ -3315,16 +3316,16 @@ function send_login()
 	$class = 'clearnet';
 
 	echo '</div></div></div>';
-	echo "<div class=\"odiv\"><div class=\"splash\"><h2><strong>Welcome to the Chatterbox</strong></h2><div class=\"splashcard\"><br>
+	echo "<div class=\"odiv\"><div class=\"splash\"><h2><strong>Welcome to the 404 Chatroom</strong></h2><div class=\"splashcard\"><br>
 	<h3><ins>Shocking News</ins>: New Updates! We're online!</h3><br>
-	<strong>Welcome to the Chatterbox - <em>The most over-compensating chat on tor</em>.</strong>
+	<strong>Welcome to the 404 Chatroom - <em>The most over-compensating chat on tor</em>.</strong>
 	<br>Are you looking for a fun - stress free, user friendly - totally secret awesome badass cool darkweb chat? That's such a coincidence, because that's what this is. All you have to do is press the <strong>Login</strong> button in the top right hand corner, enter your credentials, and start chatting. If you want to chat anonymously, just enter any nickname press <strong>Enter Chat</strong> straight away and get at it. We hope you have fun!
 	<br><br>
-	<div class=\"callout alert\" style=\"background: none; border: 2px; border-style: solid; border-color: #ffff80; border-radius: 0.5em; padding: 1em; color: white; margin-left: 10%; margin-right: 10%;\">  <p style=\"color: white; text-align: center\"><center>The <span style=\"color: #ffff80;\">Chatterbox</span> Rules</center></p><hr><ol>  <li><span style=\"color: #f4e80c;\">Nothing gross or illegal.</span></li>  <li>Freedom of speech is welcomed, but be nice.</li>  <li>Please <span style=\"color: #f4e80c;\">be respectful</span> to other chatters</li>  <li>Please <span style=\"color: #f4e80c;\">use meaningful</span> and <span style=\"color: #f4e80c;\">non-offensive nicknames</span>. No pedo nicks.</li>  <li>Please <span style=\"color: #f4e80c;\">use English</span> in the Main Chat please.</li>  <li>Please <span style=\"color: #f4e80c;\">no advertising</span> with out staff approval .</li>  <li>No drug or gun endorsements, or endorsements of other illegal markets.</li></ol> <hr /></div>
+	<div class=\"callout alert\" style=\"background: none; border: 2px; border-style: solid; border-color: #ffff80; border-radius: 0.5em; padding: 1em; color: white; margin-left: 10%; margin-right: 10%;\">  <p style=\"color: white; text-align: center\"><center>The <span style=\"color: #404 Chatroomffff80;\">404 Chatroom</span> Rules</center></p><hr><ol>  <li><span style=\"color: #ffff80;\">Nothing gross or illegal.</span></li>  <li>Freedom of speech is welcomed, but be nice.</li>  <li>Please <span style=\"color: #ffff80;\">be respectful</span> to other chatters</li>  <li>Please <span style=\"color: #ffff80;\">use meaningful</span> and <span style=\"color: #ffff80;\">non-offensive nicknames</span>. No pedo nicks.</li>  <li>Please <span style=\"color: #ffff80;\">use English</span> in the Main Chat please.</li>  <li>Please <span style=\"color: #ffff80;\">no advertising</span> with out staff approval .</li>  <li>No drug or gun endorsements, or endorsements of other illegal markets.</li></ol> <hr /></div>
 	<br><br>
 	</div><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-	<div class=\"tip\" style=\"position: fixed; bottom : 0; width: 100%\"><h4 style=\"color:white;\">~ some dude on darknet ~</h4></div>
-	</div>
+	<a href=\"http://4o4o4hn4hsujpnbsso7tqigujuokafxys62thulbk2k3mf46vq22qfqd.onion/\"><div class=\"tip\" style=\"position: fixed; bottom : 0; width: 100%\"><h4 style=\"color:white;\">~ Part of the 404 Project ~</h4></div>
+	</a>
 	<div class=\"idiv\" id=\"ABOUT\"><div class=\"idivs1\">&nbsp;</div>
         
         <div class=\"idivc\">
@@ -3334,7 +3335,7 @@ function send_login()
 	<div class=\"insb\">Spread the word</div>
 	<br>
 	If you are passionate about promoting this chat, why not put a link to the site/chat in your regular forum profile signature? Go to your signature edit box and use something like this:<br><br>
-	<div class=\"scrollbox\"><div class=\"sbc\"><pre><code>[b][size=100][bgcolor=#121525][color=#166FA6][/color][color=#F7F7F7]the Chatterbox:[/color][color=#166FA6] [/color][/bgcolor][/size] [size=100][bgcolor=#C13B5B][color=#F7F7F7]The dopest chat of darkweb.[/color][color=#C13B5B][/color][/bgcolor][/size][/b]</code></pre></div></div> <br>
+	<div class=\"scrollbox\"><div class=\"sbc\"><pre><code>[b][size=100][bgcolor=#121525][color=#166FA6][/color][color=#F7F7F7]the 404 Chatroom:[/color][color=#166FA6] [/color][/bgcolor][/size] [size=100][bgcolor=#C13B5B][color=#F7F7F7]The dopest chat of darkweb.[/color][color=#C13B5B][/color][/bgcolor][/size][/b]</code></pre></div></div> <br>
 	
 	<div class=\"insb\">Ideas and to-do's that need your input</div>
 	<br>
@@ -3440,7 +3441,7 @@ function print_chatters()
 			$roomprefix = "<span class=\"$roomclass\" title=\"$roomname\">";
 			$roompostfix = '</span>';
 
-			$link = "<a style=\"text-decoration: none;\" href=\"$_SERVER[SCRIPT_NAME]?action=post&amp;session=$U[session]&amp;lang=$language&amp;nc=$nc&amp;sendto=" . htmlspecialchars($user[0]) . '" target="post">' . style_this(htmlspecialchars($user[0]), $user[1]) . '</a>';
+			$link = "<a style=\"text-decoration: none;\" href=\"?action=post&amp;session=$U[session]&amp;lang=$language&amp;nc=$nc&amp;sendto=" . htmlspecialchars($user[0]) . '" target="post">' . style_this(htmlspecialchars($user[0]), $user[1]) . '</a>';
 
 			//staff can see the different rank icons of the staff people
 			if ($U['status'] >= 5) {    //if logged in user is moderator or higher            
@@ -3485,25 +3486,25 @@ function print_chatters()
 
 		} //end while
 		if ($U['status'] >= 5) {
-			$chanlinks = "<a style=\"color:#fff; text-decoration: none\" href=\"$_SERVER[SCRIPT_NAME]?action=post&amp;session=$U[session]&amp;lang=$language&amp;nc=$nc&amp;sendto=s 48\" target=\"post\">$I[staff]</a>";
-			$chanlinkm = "<a style=\"color:#fff; text-decoration: none\" href=\"$_SERVER[SCRIPT_NAME]?action=post&amp;session=$U[session]&amp;lang=$language&amp;nc=$nc&amp;sendto=s 31\" target=\"post\">$I[members2]</a>";
-			$chanlinkrg = "<a style=\"color:#fff; text-decoration: none\" href=\"$_SERVER[SCRIPT_NAME]?action=post&amp;session=$U[session]&amp;lang=$language&amp;nc=$nc&amp;sendto=s 24\" target=\"post\">$I[regguests]</a>";
-			$chanlinkg = "<a style=\"color:#fff; text-decoration: none\" href=\"$_SERVER[SCRIPT_NAME]?action=post&amp;session=$U[session]&amp;lang=$language&amp;nc=$nc&amp;sendto=s 17\" target=\"post\">$I[guests]</a>";
+			$chanlinks = "<a style=\"color:#fff; text-decoration: none\" href=\"?action=post&amp;session=$U[session]&amp;lang=$language&amp;nc=$nc&amp;sendto=s 48\" target=\"post\">$I[staff]</a>";
+			$chanlinkm = "<a style=\"color:#fff; text-decoration: none\" href=\"?action=post&amp;session=$U[session]&amp;lang=$language&amp;nc=$nc&amp;sendto=s 31\" target=\"post\">$I[members2]</a>";
+			$chanlinkrg = "<a style=\"color:#fff; text-decoration: none\" href=\"?action=post&amp;session=$U[session]&amp;lang=$language&amp;nc=$nc&amp;sendto=s 24\" target=\"post\">$I[regguests]</a>";
+			$chanlinkg = "<a style=\"color:#fff; text-decoration: none\" href=\"?action=post&amp;session=$U[session]&amp;lang=$language&amp;nc=$nc&amp;sendto=s 17\" target=\"post\">$I[guests]</a>";
 		} elseif ($U['status'] == 3) {
 			$chanlinks = "$I[staff]";
-			$chanlinkm = "<a style=\"color:#fff; text-decoration: none\" href=\"$_SERVER[SCRIPT_NAME]?action=post&amp;session=$U[session]&amp;lang=$language&amp;nc=$nc&amp;sendto=s 31\"  target=\"post\">$I[members2]</a>";
-			$chanlinkrg = "<a style=\"color:#fff; text-decoration: none\" href=\"$_SERVER[SCRIPT_NAME]?action=post&amp;session=$U[session]&amp;lang=$language&amp;nc=$nc&amp;sendto=s 24\" target=\"post\">$I[regguests]</a>";
-			$chanlinkg = "<a style=\"color:#fff; text-decoration: none\" href=\"$_SERVER[SCRIPT_NAME]?action=post&amp;session=$U[session]&amp;lang=$language&amp;nc=$nc&amp;sendto=s 17\" target=\"post\">$I[guests]</a>";
+			$chanlinkm = "<a style=\"color:#fff; text-decoration: none\" href=\"?action=post&amp;session=$U[session]&amp;lang=$language&amp;nc=$nc&amp;sendto=s 31\"  target=\"post\">$I[members2]</a>";
+			$chanlinkrg = "<a style=\"color:#fff; text-decoration: none\" href=\"?action=post&amp;session=$U[session]&amp;lang=$language&amp;nc=$nc&amp;sendto=s 24\" target=\"post\">$I[regguests]</a>";
+			$chanlinkg = "<a style=\"color:#fff; text-decoration: none\" href=\"?action=post&amp;session=$U[session]&amp;lang=$language&amp;nc=$nc&amp;sendto=s 17\" target=\"post\">$I[guests]</a>";
 		} elseif ($U['status'] == 2) {
 			$chanlinks = "$I[staff]";
 			$chanlinkm = "$I[members2]";
-			$chanlinkrg = "<a style=\"color:#fff; text-decoration: none\" href=\"$_SERVER[SCRIPT_NAME]?action=post&amp;session=$U[session]&amp;lang=$language&amp;nc=$nc&amp;sendto=s 24\" target=\"post\">$I[regguests]</a>";
-			$chanlinkg = "<a style=\"color:#fff; text-decoration: none\" href=\"$_SERVER[SCRIPT_NAME]?action=post&amp;session=$U[session]&amp;lang=$language&amp;nc=$nc&amp;sendto=s 17\" target=\"post\">$I[guests]</a>";
+			$chanlinkrg = "<a style=\"color:#fff; text-decoration: none\" href=\"?action=post&amp;session=$U[session]&amp;lang=$language&amp;nc=$nc&amp;sendto=s 24\" target=\"post\">$I[regguests]</a>";
+			$chanlinkg = "<a style=\"color:#fff; text-decoration: none\" href=\"?action=post&amp;session=$U[session]&amp;lang=$language&amp;nc=$nc&amp;sendto=s 17\" target=\"post\">$I[guests]</a>";
 		} else {
 			$chanlinks = "$I[staff]";
 			$chanlinkm = "$I[members2]";
 			$chanlinkrg = "$I[regguests]";
-			$chanlinkg = "<a style=\"color:#fff; text-decoration: none\" href=\"$_SERVER[SCRIPT_NAME]?action=post&amp;session=$U[session]&amp;lang=$language&amp;nc=$nc&amp;sendto=s 17\" target=\"post\">$I[guests]</a>";
+			$chanlinkg = "<a style=\"color:#fff; text-decoration: none\" href=\"?action=post&amp;session=$U[session]&amp;lang=$language&amp;nc=$nc&amp;sendto=s 17\" target=\"post\">$I[guests]</a>";
 		}
 		if (!empty($S)) {
 			echo "<span class='group'>" . $chanlinks . " (" . count($S) . ")</span><div>" . implode('</span><br><span>', $S) . '</div>';
@@ -4467,7 +4468,7 @@ function validate_input()
 		if ($_FILES['file']['error'] === UPLOAD_ERR_OK && $_FILES['file']['size'] <= (1024 * get_setting('maxuploadsize'))) {
 			$hash = sha1_file($_FILES['file']['tmp_name']);
 			$name = htmlspecialchars($_FILES['file']['name']);
-			$message = sprintf(get_setting('msgattache'), "<a class=\"attachement\" href=\"$_SERVER[SCRIPT_NAME]?action=download&amp;id=$hash\" target=\"_blank\">$name</a>", $message);
+			$message = sprintf(get_setting('msgattache'), "<a class=\"attachement\" href=\"?action=download&amp;id=$hash\" target=\"_blank\">$name</a>", $message);
 		}
 	}
 	if (add_message($message, $recipient, $U['nickname'], $U['status'], $poststatus, $displaysend, $U['style'])) {
@@ -4554,7 +4555,7 @@ function apply_linkfilter($message)
 		);
 	}
 	if (empty($redirect)) {
-		$redirect = "$_SERVER[SCRIPT_NAME]?action=redirect&amp;url=";
+		$redirect = "?action=redirect&amp;url=";
 	}
 	if (get_setting('forceredirect')) {
 		$message = preg_replace_callback(
@@ -5052,19 +5053,19 @@ function make_nicknames_clickable($message)
 	/* REMOVE LATER
     //option 1
     if($pm || ((int)$U['clickablenicknames']===1)){
-          $replacement = "<a class=\"nicklink\" href=\"$_SERVER[SCRIPT_NAME]?action=post&amp;session=$U[session]&amp;lang=$language&amp;nc=$nc&amp;sendto=".htmlspecialchars('$2').'" target="post">'.'$1'.'</a>';    
+          $replacement = "<a class=\"nicklink\" href=\"?action=post&amp;session=$U[session]&amp;lang=$language&amp;nc=$nc&amp;sendto=".htmlspecialchars('$2').'" target="post">'.'$1'.'</a>';    
     }
 
     //option 2
     if(!$pm && ((int)$U['clickablenicknames']===2)){
-    $replacement = "<a class=\"nicklink\" href=\"$_SERVER[SCRIPT_NAME]?action=post&amp;session=$U[session]&amp;lang=$language&amp;nc=$nc&amp;sendto=".$channel_encoded."&amp;nickname=@".htmlspecialchars('$2').'&nbsp" target="post">'.'$1'.'</a>';
+    $replacement = "<a class=\"nicklink\" href=\"?action=post&amp;session=$U[session]&amp;lang=$language&amp;nc=$nc&amp;sendto=".$channel_encoded."&amp;nickname=@".htmlspecialchars('$2').'&nbsp" target="post">'.'$1'.'</a>';
     }
     */
 
 	if ($pm) { //IF PM DETECTED
-		$replacement = "<a class=\"nicklink\" href=\"$_SERVER[SCRIPT_NAME]?action=post&amp;session=$U[session]&amp;lang=$language&amp;nc=$nc&amp;sendto=" . htmlspecialchars('$2') . '" target="post">' . '$1' . '</a>';
+		$replacement = "<a class=\"nicklink\" href=\"?action=post&amp;session=$U[session]&amp;lang=$language&amp;nc=$nc&amp;sendto=" . htmlspecialchars('$2') . '" target="post">' . '$1' . '</a>';
 	} else { //Message to all or to one of the channels
-		$replacement = "<a class=\"nicklink\" href=\"$_SERVER[SCRIPT_NAME]?action=post&amp;session=$U[session]&amp;lang=$language&amp;nc=$nc&amp;sendto=" . $channel_encoded . "&amp;nickname=@" . htmlspecialchars('$2') . '&nbsp" target="post">' . '$1' . '</a>';
+		$replacement = "<a class=\"nicklink\" href=\"?action=post&amp;session=$U[session]&amp;lang=$language&amp;nc=$nc&amp;sendto=" . $channel_encoded . "&amp;nickname=@" . htmlspecialchars('$2') . '&nbsp" target="post">' . '$1' . '</a>';
 	}
 
 	//regex for option 1 and option 2 and PM
