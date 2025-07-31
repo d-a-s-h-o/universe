@@ -1,13 +1,48 @@
+body.controls {
+  background-color: var(--lv1-col) !important;
+  width: 100%;
+  margin: 0;
+  padding: 0px;
+}
+
 .controls {
   background-color: var(--lv1-col) !important;
   width: fit-content;
 }
 
+.controls table {
+  background-color: var(--lv1-col) !important;
+  /* border: 1px solid var(--accent); */
+  border-radius: 5px;
+  padding: 2px;
+  margin: 0px auto;
+}
+
+.controls td {
+  padding: 5px;
+  text-align: center;
+}
+
+.controls input[type="submit"] {
+  background-color: var(--accent2) !important;
+  color: var(--button-text-col) !important;
+  border: 1px solid var(--accent) !important;
+  border-radius: 3px;
+  padding: 4px 10px;
+  cursor: pointer;
+  font-size: 12px;
+  margin: 2px;
+}
+
+.controls input[type="submit"]:hover {
+  background-color: var(--accent) !important;
+  color: var(--accent3) !important;
+}
+
 .ext-icon {
   float: right;
-  display: inline-block !important;
+  display: block !important;
   background-color: unset !important;
-  vertical-align: middle;
   margin-right: 20px;
   margin-top: 10px;
 }

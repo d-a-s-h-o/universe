@@ -1,0 +1,32 @@
+FROM nginx:latest
+
+# Install Tor and process management tools
+RUN apt-get update && apt-get install -y \
+    tor \
+    tini \
+    procps \
+    && rm -rf /var/lib/apt/lists/*
+
+# Create Tor directories and set permissions
+RUN mkdir -p /var/lib/tor/hidden_service && \
+    mkdir -p /etc/tor && \
+    mkdir -p /var/log/tor && \
+    usermod -s /bin/bash debian-tor && \
+    chown -R debian-tor:debian-tor /var/lib/tor /var/log/tor && \
+    chmod 700 /var/lib/tor && \
+    chmod 700 /var/lib/tor/hidden_service
+
+# Copy Tor configuration
+COPY torrc /etc/tor/torrc
+RUN chown debian-tor:debian-tor /etc/tor/torrc
+
+# Copy startup script
+COPY nginx-tor-start.sh /usr/local/bin/nginx-tor-start.sh
+RUN chmod +x /usr/local/bin/nginx-tor-start.sh
+
+# Create directory for hostname files
+RUN mkdir -p /var/www/html && chown -R www-data:www-data /var/www/html
+
+# Use tini as init system for better signal handling
+ENTRYPOINT ["/usr/bin/tini", "--"]
+CMD ["/usr/local/bin/nginx-tor-start.sh"]

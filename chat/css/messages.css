@@ -2,13 +2,17 @@
   padding: 0.5em 0.5em;
   background-color: var(--lv2-col);
   border: solid var(--lv3-col);
-  width: 95%;
+  width: 80%;
   margin-left: 1em;
   margin-right: 2em;
 }
 
 .msglink{
   text-decoration: none;
+}
+
+a .nicklink {
+  text-decoration: underline dotted var(--accent);
 }
 
 .msglink:hover{

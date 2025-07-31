@@ -4,7 +4,7 @@
 @import url("css/controls.css");
 @import url("css/navbtn.css");
 @import url("css/text.css");
-@import url("css/sidebar.css");
+/* @import url("css/sidebar.css"); */
 @import url("css/topnav.css");
 @import url("css/sprite.css");
 @import url("css/container.css");
@@ -27,4 +27,5 @@
 @import url("css/notes.css");
 @import url("css/filter.css");
 @import url("css/backup.css");
-@import url("css/icons/css/all.css")
+@import url("css/icons/css/all.css");
+@import url("css/rooms.css");

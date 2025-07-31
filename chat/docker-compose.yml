@@ -1,0 +1,123 @@
+version: '3.8'
+services:
+  php-fpm:
+    container_name: chatterbox_php
+    build: .
+    restart: unless-stopped
+    volumes:
+      - .:/var/www/html
+      - ./php.ini:/usr/local/etc/php/php.ini
+      - sqlite_data:/var/lib/sqlite
+    environment:
+      - SQLITE_DB_PATH=${SQLITE_DB_PATH:-/var/lib/sqlite/chat.sqlite}
+      - PHP_UPLOAD_MAX_FILESIZE=10000M
+      - PHP_POST_MAX_SIZE=10000M
+      - PHP_MEMORY_LIMIT=4000M
+      - PHP_MAX_EXECUTION_TIME=1200
+      - PHP_MAX_INPUT_TIME=1200
+      - UPLOAD_MAX_FILESIZE=10000M
+      - POST_MAX_SIZE=10000M
+      - MEMORY_LIMIT=4000M
+      - MAX_EXECUTION_TIME=1200
+      - MAX_INPUT_TIME=1200
+      - UPLOAD_LIMIT=10000M
+
+  nginx-1:
+    container_name: chatterbox
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: Dockerfile.nginx
+    volumes:
+      - .:/var/www/html
+      - ./site.conf:/etc/nginx/conf.d/default.conf
+      - sqlite_data_1:/var/lib/sqlite
+      - tor_data_1:/var/lib/tor
+    depends_on:
+      - php-fpm
+    environment:
+      - SQLITE_DB_PATH=${SQLITE_DB_PATH_1:-/var/lib/sqlite/chat1.sqlite}
+      - NGINX_CLIENT_MAX_BODY_SIZE=10000M
+      - PHP_UPLOAD_MAX_FILESIZE=10000M
+      - PHP_POST_MAX_SIZE=10000M
+      - PHP_MEMORY_LIMIT=4000M
+      - PHP_MAX_EXECUTION_TIME=1200
+      - PHP_MAX_INPUT_TIME=1200
+      - UPLOAD_MAX_FILESIZE=10000M
+      - POST_MAX_SIZE=10000M
+      - MEMORY_LIMIT=4000M
+      - MAX_EXECUTION_TIME=1200
+      - MAX_INPUT_TIME=1200
+      - UPLOAD_LIMIT=10000M
+
+  nginx-2:
+    container_name: shitchat2
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: Dockerfile.nginx
+    volumes:
+      - .:/var/www/html
+      - ./site.conf:/etc/nginx/conf.d/default.conf
+      - sqlite_data_2:/var/lib/sqlite
+      - tor_data_2:/var/lib/tor
+    depends_on:
+      - php-fpm
+    environment:
+      - SQLITE_DB_PATH=${SQLITE_DB_PATH_2:-/var/lib/sqlite/chat2.sqlite}
+      - NGINX_CLIENT_MAX_BODY_SIZE=10000M
+      - PHP_UPLOAD_MAX_FILESIZE=10000M
+      - PHP_POST_MAX_SIZE=10000M
+      - PHP_MEMORY_LIMIT=4000M
+      - PHP_MAX_EXECUTION_TIME=1200
+      - PHP_MAX_INPUT_TIME=1200
+      - UPLOAD_MAX_FILESIZE=10000M
+      - POST_MAX_SIZE=10000M
+      - MEMORY_LIMIT=4000M
+      - MAX_EXECUTION_TIME=1200
+      - MAX_INPUT_TIME=1200
+      - UPLOAD_LIMIT=10000M
+
+  nginx-3:
+    container_name: shitchat3
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: Dockerfile.nginx
+    volumes:
+      - .:/var/www/html
+      - ./site.conf:/etc/nginx/conf.d/default.conf
+      - sqlite_data_3:/var/lib/sqlite
+      - tor_data_3:/var/lib/tor
+    depends_on:
+      - php-fpm
+    environment:
+      - SQLITE_DB_PATH=${SQLITE_DB_PATH_3:-/var/lib/sqlite/chat3.sqlite}
+      - NGINX_CLIENT_MAX_BODY_SIZE=10000M
+      - PHP_UPLOAD_MAX_FILESIZE=10000M
+      - PHP_POST_MAX_SIZE=10000M
+      - PHP_MEMORY_LIMIT=4000M
+      - PHP_MAX_EXECUTION_TIME=1200
+      - PHP_MAX_INPUT_TIME=1200
+      - UPLOAD_MAX_FILESIZE=10000M
+      - POST_MAX_SIZE=10000M
+      - MEMORY_LIMIT=4000M
+      - MAX_EXECUTION_TIME=1200
+      - MAX_INPUT_TIME=1200
+      - UPLOAD_LIMIT=10000M
+
+volumes:
+  sqlite_data:
+    driver: local
+  sqlite_data_1:
+    driver: local
+  sqlite_data_2:
+    driver: local
+  sqlite_data_3:
+    driver: local
+  tor_data_1:
+    driver: local
+  tor_data_2:
+    driver: local
+  tor_data_3:
+    driver: local

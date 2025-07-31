@@ -1,0 +1,128 @@
+/* Room selection styling */
+#roomblock {
+  background: rgba(0, 0, 0, 0.7) !important; /* More opaque since it's not in iframe */
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  padding: 8px;
+  margin: 4px 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  display: inline-block;
+  width: 100%; /* Fill the container */
+  box-sizing: border-box;
+}
+
+#roomblock:hover {
+  background: rgba(0, 0, 0, 0.8) !important; /* More opaque on hover */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  transform: translateY(-1px);
+}
+
+.room-header {
+  margin-bottom: 6px;
+  text-align: center;
+}
+
+.room-label {
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+  display: inline-block;
+}
+
+.room-selector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+#roomblock select#room {
+  background: var(--lv2-col);
+  color: var(--button-text-col);
+  border: 1px solid var(--accent);
+  border-radius: 4px;
+  padding: 3px 5px;
+  font-size: 10px;
+  min-width: 100px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex: 1;
+}
+
+#roomblock select#room:hover {
+  background: var(--accent2);
+  border-color: var(--accent);
+}
+
+#roomblock select#room:focus {
+  outline: none;
+  background: var(--lv3-col);
+  border-color: var(--accent);
+  box-shadow: 0 0 4px rgba(255, 255, 128, 0.4);
+}
+
+#roomblock select#room option {
+  background: var(--lv2-col);
+  color: var(--button-text-col);
+  padding: 2px;
+}
+
+#roomblock select#room option:selected {
+  background: var(--accent2);
+  color: var(--button-text-col);
+}
+
+#roomblock input[type="submit"] {
+  background: linear-gradient(135deg, var(--accent2), var(--accent));
+  color: var(--button-text-col);
+  border: 1px solid var(--accent);
+  border-radius: 4px;
+  padding: 3px 6px;
+  font-size: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+  white-space: nowrap;
+}
+
+#roomblock input[type="submit"]:hover {
+  background: linear-gradient(135deg, var(--accent), var(--accent3));
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+#roomblock input[type="submit"]:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 480px) {
+  #roomblock {
+    margin: 2px 0;
+    padding: 6px;
+  }
+  
+  .room-selector {
+    flex-direction: column;
+    gap: 3px;
+  }
+  
+  #roomblock select#room {
+    width: 100%;
+    min-width: 80px;
+  }
+  
+  #roomblock input[type="submit"] {
+    width: 100%;
+  }
+  
+  .room-label {
+    font-size: 10px;
+  }
+}
