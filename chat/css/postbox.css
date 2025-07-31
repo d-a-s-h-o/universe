@@ -5,6 +5,10 @@
   background-size: cover;
 }
 
+.post input {
+  cursor: pointer;
+}
+
 /* First Line */
 .post input[name="message"],
 .post textarea[name="message"] {
@@ -19,17 +23,31 @@
 
 .post input[value="Send to"] {
   all: unset;
+  background-color: var(--accent);
+  border: solid var(--accent2);
+  border-radius: 0.2em;
+  border-width: 0.1em;
+  color: var(--accent2);
   padding: 0.3em;
+  margin-left: 0.5em;
+  margin-right: 0.5em;
   text-align: left;
-  color: var(--accent);
   font-family: Arial, Helvetica, sans-serif;
+  transition: background-color, color, border, padding, margin, 0.3s;
+  transition-timing-function: ease-in-out;
 }
 
 .post input[value="Send to"]:hover {
   all: unset;
-  background-color: var(--accent);
-  color: var(--accent2);
+  background-color: var(--accent2);
+  border: solid var(--accent);
+  border-radius: 0.2em;
+  border-width: 0.1em;
+  cursor: pointer;
+  color: var(--accent);
   padding: 0.3em;
+  margin-left: 0.5em;
+  margin-right: 0.5em;
   text-align: left;
   font-family: Arial, Helvetica, sans-serif;
 }

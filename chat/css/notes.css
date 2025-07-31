@@ -109,7 +109,7 @@
   color: var(--accent2);
 }
 
-.notes input[value="Public notes"] {
+.notes input[value="Member notes"] {
   background-color: var(--accent2);
   padding: 0.3em;
   font-family: Arial, Helvetica, sans-serif;
@@ -121,7 +121,7 @@
   transition-timing-function: ease-in-out;
 }
 
-.notes input[value="Public notes"]:hover {
+.notes input[value="Member notes"]:hover {
   background-color: var(--accent);
   padding: 0.3em;
   font-family: Arial, Helvetica, sans-serif;
