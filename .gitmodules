@@ -1,9 +1,16 @@
 [submodule "portfolio"]
 	path = portfolio
 	url = https://github.com/d-a-s-h-o/d-a-s-h-o.git
+	branch = master
 [submodule "droplets"]
 	path = droplets
-	url = https://github.com/d-a-s-h-o/droplets
+	url = https://github.com/d-a-s-h-o/droplets.git
+	branch = master
 [submodule "dotfiles"]
 	path = dotfiles
-	url = https://github.com/d-a-s-h-o/dotfiles
+	url = https://github.com/d-a-s-h-o/dotfiles.git
+	branch = main
+[submodule "bhcli"]
+	path = bhcli
+	url = https://github.com/d-a-s-h-o/bhcli.git
+	branch = epic
